@@ -4,7 +4,7 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 
 ## 下载 macOS 版
 
-**[下载 TopxAI Desktop 1.52.0（Apple Silicon）](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.52.0-macOS-arm64.dmg)**
+**[下载 TopxAI Desktop 1.52.1（Apple Silicon）](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.52.1-macOS-arm64.dmg)**
 
 [查看发布说明与全部附件](https://github.com/UnbelievableT/topxai-releases/releases/latest)
 
