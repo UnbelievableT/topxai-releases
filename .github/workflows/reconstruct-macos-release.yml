@@ -19,6 +19,9 @@ on:
       delta_sha256:
         required: true
         type: string
+      delta_blob_sha:
+        required: true
+        type: string
 permissions:
   contents: read
 jobs:
@@ -36,6 +39,7 @@ jobs:
       BASE_DMG: ${{ inputs.base_dmg }}
       TARGET_DMG: ${{ inputs.target_dmg }}
       DELTA_SHA256: ${{ inputs.delta_sha256 }}
+      DELTA_BLOB_SHA: ${{ inputs.delta_blob_sha }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Download and verify reconstruction inputs
@@ -43,7 +47,15 @@ jobs:
           set -euo pipefail
           test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
           mkdir inputs output base
-          gh release download "$RELEASE_TAG" -p app-delta.tar.gz -D inputs
+          python3 - <<'PY'
+          import base64,json,os,re,subprocess
+          from pathlib import Path
+          sha=os.environ['DELTA_BLOB_SHA']
+          assert re.fullmatch('[0-9a-f]{40}',sha)
+          blob=json.loads(subprocess.check_output(['gh','api','repos/'+os.environ['GH_REPO']+'/git/blobs/'+sha]))
+          assert blob['encoding']=='base64' and blob['sha']==sha
+          Path('inputs/app-delta.tar.gz').write_bytes(base64.b64decode(blob['content']))
+          PY
           gh release download "$BASE_TAG" -p "$BASE_DMG" -D inputs
           gh release download "$RELEASE_TAG" -p INSTALL.md -p INSTALL.zh-CN.md -p THIRD-PARTY-NOTICES.txt -D output
           python3 - <<'PY'
