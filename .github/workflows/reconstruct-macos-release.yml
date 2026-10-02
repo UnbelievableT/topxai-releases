@@ -1,0 +1,89 @@
+name: Reconstruct verified macOS installer
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        required: true
+        type: string
+      base_tag:
+        required: true
+        type: string
+      base_dmg:
+        required: true
+        type: string
+      target_dmg:
+        required: true
+        type: string
+      delta_sha256:
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  reconstruct:
+    runs-on: macos-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ inputs.release_tag }}
+      BASE_TAG: ${{ inputs.base_tag }}
+      BASE_DMG: ${{ inputs.base_dmg }}
+      TARGET_DMG: ${{ inputs.target_dmg }}
+      DELTA_SHA256: ${{ inputs.delta_sha256 }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Download and verify reconstruction inputs
+        run: |
+          set -euo pipefail
+          test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
+          mkdir inputs output base
+          gh release download "$RELEASE_TAG" -p app-delta.tar.gz -D inputs
+          gh release download "$BASE_TAG" -p "$BASE_DMG" -D inputs
+          gh release download "$RELEASE_TAG" -p INSTALL.md -p INSTALL.zh-CN.md -p THIRD-PARTY-NOTICES.txt -D output
+          python3 - <<'PY'
+          import hashlib,json,os,tarfile
+          from pathlib import Path
+          p=Path('inputs/app-delta.tar.gz')
+          assert hashlib.file_digest(p.open('rb'),'sha256').hexdigest()==os.environ['DELTA_SHA256']
+          with tarfile.open(p) as a: m=json.load(a.extractfile('manifest.json'))
+          base=Path('inputs')/os.environ['BASE_DMG']
+          assert hashlib.file_digest(base.open('rb'),'sha256').hexdigest()==m['baseDmgSha256']
+          PY
+      - name: Reconstruct and verify the signed app
+        run: |
+          set -euo pipefail
+          hdiutil attach -readonly -nobrowse -mountpoint base "inputs/$BASE_DMG"
+          python3 scripts/reconstruct-release.py inputs/app-delta.tar.gz 'base/TopxAI Desktop.app' stage
+          codesign --verify --deep --strict 'stage/TopxAI Desktop.app'
+          hdiutil detach base
+      - name: Create and verify the installer
+        run: |
+          set -euo pipefail
+          hdiutil create -volname 'TopxAI Desktop' -srcfolder stage -ov -format UDZO -fs APFS "output/$TARGET_DMG"
+          hdiutil verify "output/$TARGET_DMG"
+          mkdir mounted
+          hdiutil attach -readonly -nobrowse -mountpoint mounted "output/$TARGET_DMG"
+          python3 scripts/reconstruct-release.py verify 'mounted/TopxAI Desktop.app' verified-app-manifest.json
+          codesign --verify --deep --strict 'mounted/TopxAI Desktop.app'
+          test "$(readlink mounted/Applications)" = /Applications
+          cmp 'mounted/使用说明.txt' 'stage/使用说明.txt'
+          cmp mounted/THIRD-PARTY-NOTICES.txt output/THIRD-PARTY-NOTICES.txt
+          hdiutil detach mounted
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          def sha(p): return hashlib.file_digest(p.open('rb'),'sha256').hexdigest()
+          out=Path('output');files=sorted(out.iterdir())
+          (out/'SHA256SUMS').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in files))
+          dmg=out/os.environ['TARGET_DMG']
+          proof={'version':json.loads(Path('verified-app-manifest.json').read_text())['version'],'dmgSha256':sha(dmg),'dmgBytes':dmg.stat().st_size,'appManifestSha256':sha(Path('verified-app-manifest.json')),'allAppFilesVerified':True,'mountedImageVerified':True,'deepStrictSignatureVerified':True,'workflowRun':os.environ['GITHUB_RUN_ID']}
+          Path('reconstruction-verification.json').write_text(json.dumps(proof,indent=2)+'\n')
+          PY
+      - name: Upload verified installer to the draft release
+        run: |
+          set -euo pipefail
+          test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
+          gh release upload "$RELEASE_TAG" "output/$TARGET_DMG" output/SHA256SUMS reconstruction-verification.json --clobber
