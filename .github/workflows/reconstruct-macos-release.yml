@@ -1,5 +1,7 @@
 name: Reconstruct verified macOS installer
 on:
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       release_tag:
@@ -21,6 +23,7 @@ permissions:
   contents: read
 jobs:
   reconstruct:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
     timeout-minutes: 35
     permissions:
@@ -87,3 +90,11 @@ jobs:
           set -euo pipefail
           test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
           gh release upload "$RELEASE_TAG" "output/$TARGET_DMG" output/SHA256SUMS reconstruction-verification.json --clobber
+  verify-public-assets:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Verify every anonymous public download
+        run: python3 scripts/verify-public-release.py "$GITHUB_EVENT_PATH"
