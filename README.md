@@ -9,7 +9,7 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 [查看发布说明与全部附件](https://github.com/UnbelievableT/topxai-releases/releases/latest)
 
 - 适用于 Apple Silicon（M 系列），要求 macOS 15 或更高版本；当前实机验证环境为 macOS 27。
-- 下载约 1.7 GB，包含内置工具运行环境。此包不适用于 Intel Mac 或 Windows。
+- 下载约 1.8 GB，包含内置工具运行环境。此包不适用于 Intel Mac 或 Windows。
 - **当前版本未使用 Apple Developer ID 签名，未经过 Apple 公证。** 首次打开需要用户在 macOS 中手动允许。
 
 打开 DMG，将 TopxAI 拖入“应用程序”。如果首次打开被系统阻止，请进入 **系统设置 → 隐私与安全性 → 仍要打开**，按系统提示确认。详细步骤、权限说明和校验方法见发布附件 `INSTALL.zh-CN.md`。

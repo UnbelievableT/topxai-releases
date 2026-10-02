@@ -7,7 +7,7 @@ Download the application from [TopxAI Releases](https://github.com/UnbelievableT
 - **Apple Silicon (M series), macOS 15 or later.** This installer does not support Intel Macs or Windows.
 - Native verification was performed on **macOS 27 Apple Silicon**. The minimum version is a build requirement; macOS 15 and every supported Mac model have not been tested on physical devices.
 - The application is **ad-hoc signed, not signed with an Apple Developer ID, and not notarized by Apple**. You may need to approve it in macOS before opening it for the first time.
-- The installer is about **1.7 GB** because it includes the runtime for built-in tools. External applications, service accounts, and operating-system permissions may still be required for specific features.
+- The installer is about **1.8 GB** because it includes the runtime for built-in tools. External applications, service accounts, and operating-system permissions may still be required for specific features.
 
 ## Install or update
 
