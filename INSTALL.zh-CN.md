@@ -1,8 +1,8 @@
-# TopxAI Desktop 1.52.2 · macOS 公开下载版
+# TopxAI Desktop 1.52.3 · macOS 公开下载版
 
 本次修复“检查更新”：直接检查 TopxAI 官方公开发布的新版本，并提供手动下载入口。当前版本仍需使用 DMG 手动安装，不会承诺后台自动安装。首次打开仍固定为 English，可选择 5 种语言（English、简体中文、日本語、Русский、Español），并记住已确认的选择。
 
-发布标识：`v1.52.2-macos.20261001`。请从 [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases) 手动下载对应版本。
+发布标识：`v1.52.3-macos.20261002`。请从 [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases) 手动下载对应版本。
 
 ## 系统要求与验证范围
 
@@ -14,7 +14,7 @@
 
 ## 安装与首次打开
 
-1. 从对应发布页面下载 **`TopxAI-1.52.2-macOS-arm64.dmg`**。
+1. 从对应发布页面下载 **`TopxAI-1.52.3-macOS-arm64.dmg`**。
 2. 完全退出旧版 TopxAI，再打开 DMG，将 `TopxAI Desktop.app` 拖入“应用程序”。安装后从“应用程序”启动，避免同时运行两个版本。
 3. 如果 macOS 提示无法验证开发者或无法检查恶意软件，先关闭提示，然后打开 **系统设置 → 隐私与安全性**，在安全性区域找到刚被阻止的 TopxAI，选择 **“仍要打开”**。
 4. 按系统要求完成密码或 Touch ID 验证，并在再次出现的确认框中选择 **“打开”**。这只为该应用添加例外；不要关闭系统全局 Gatekeeper，也不需要使用 `sudo xattr` 命令。步骤依据 [Apple 官方安装说明](https://support.apple.com/zh-cn/102445)。
@@ -40,6 +40,6 @@
 shasum -a 256 -c SHA256SUMS
 ```
 
-确认 `TopxAI-1.52.2-macOS-arm64.dmg: OK`。此命令只读取并校验文件，不会改变系统安全设置。请勿使用其他版本的校验文件。
+确认 `TopxAI-1.52.3-macOS-arm64.dmg: OK`。此命令只读取并校验文件，不会改变系统安全设置。请勿使用其他版本的校验文件。
 
 反馈安装问题时，请附 macOS 版本、芯片型号、应用版本和错误提示；不要附密码、API 密钥或私人会话内容。

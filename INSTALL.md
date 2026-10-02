@@ -1,6 +1,6 @@
-# Install TopxAI Desktop 1.52.2 on macOS
+# Install TopxAI Desktop 1.52.3 on macOS
 
-Download the application from [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases/tag/v1.52.2-macos.20261001). This release fixes update checking and provides a verified link for a **manual DMG upgrade**. It does not automatically download or install an update.
+Download the application from [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases/tag/v1.52.3-macos.20261002). This release improves diagram navigation, skill selection and subagent identities. Updates use a **manual DMG upgrade**. It does not automatically download or install an update.
 
 ## Requirements and signing
 
@@ -11,14 +11,14 @@ Download the application from [TopxAI Releases](https://github.com/UnbelievableT
 
 ## Install or update
 
-1. Download `TopxAI-1.52.2-macOS-arm64.dmg` from the release page. Do not use GitHub's automatically generated “Source code” archives; those contain the download repository's documentation, not the application.
+1. Download `TopxAI-1.52.3-macOS-arm64.dmg` from the release page. Do not use GitHub's automatically generated “Source code” archives; those contain the download repository's documentation, not the application.
 2. Quit any running version of TopxAI. Open the DMG and drag `TopxAI Desktop.app` into **Applications**. Replace the older application if updating, then launch it from Applications. Avoid running multiple copies at once.
 3. If macOS blocks the application because the developer cannot be verified, dismiss the message and open **System Settings → Privacy & Security**. Find the message about TopxAI and select **Open Anyway**.
 4. Complete the system's password or Touch ID confirmation and choose **Open** when prompted. This grants an exception for this application; do not disable Gatekeeper globally and do not run `sudo xattr` commands. See [Apple's official instructions](https://support.apple.com/en-us/102445).
 
 If “Open Anyway” is not present, first confirm that you tried to launch the application. A managed Mac may require help from your administrator. If macOS says the app is damaged or will harm your computer, stop, verify the download source and checksum, and report the message.
 
-**Users of 1.52.0 or 1.52.1 need to download 1.52.2 manually to receive the update-check fix.** In 1.52.2, Settings can check the official public release and open its download link. Installation still requires quitting the old version and replacing the application manually.
+**Users of 1.52.0 or 1.52.1 need to download 1.52.3 manually to receive the update-check fix.** In 1.52.2 and later, Settings can check the official public release and open its download link. Installation still requires quitting the old version and replacing the application manually.
 
 ## First launch and language
 
@@ -41,7 +41,7 @@ Download this release's `SHA256SUMS` file into the same folder as the DMG. In Te
 shasum -a 256 -c SHA256SUMS
 ```
 
-The result should include `TopxAI-1.52.2-macOS-arm64.dmg: OK`. This command only reads and verifies the file; it does not change security settings. Do not use another release's checksum file.
+The result should include `TopxAI-1.52.3-macOS-arm64.dmg: OK`. This command only reads and verifies the file; it does not change security settings. Do not use another release's checksum file.
 
 Third-party license and source notices are provided in `THIRD-PARTY-NOTICES.txt` and retained inside the application.
 
