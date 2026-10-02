@@ -48,13 +48,21 @@ jobs:
           test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
           mkdir inputs output base
           python3 - <<'PY'
-          import base64,json,os,re,subprocess
+          import base64,concurrent.futures,hashlib,json,os,re,subprocess
           from pathlib import Path
-          sha=os.environ['DELTA_BLOB_SHA']
-          assert re.fullmatch('[0-9a-f]{40}',sha)
-          blob=json.loads(subprocess.check_output(['gh','api','repos/'+os.environ['GH_REPO']+'/git/blobs/'+sha]))
-          assert blob['encoding']=='base64' and blob['sha']==sha
-          Path('inputs/app-delta.tar.gz').write_bytes(base64.b64decode(blob['content']))
+          def get_blob(sha):
+            assert re.fullmatch('[0-9a-f]{40}',sha)
+            blob=json.loads(subprocess.check_output(['gh','api','repos/'+os.environ['GH_REPO']+'/git/blobs/'+sha]))
+            assert blob['encoding']=='base64' and blob['sha']==sha
+            return base64.b64decode(blob['content'])
+          data=get_blob(os.environ['DELTA_BLOB_SHA'])
+          if data.startswith(b'{'):
+            index=json.loads(data)
+            assert index['format']=='topxai-delta-chunks-v1'
+            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+              data=b''.join(pool.map(get_blob,index['parts']))
+            assert hashlib.sha256(data).hexdigest()==index['sha256']
+          Path('inputs/app-delta.tar.gz').write_bytes(data)
           PY
           gh release download "$BASE_TAG" -p "$BASE_DMG" -D inputs
           gh release download "$RELEASE_TAG" -p INSTALL.md -p INSTALL.zh-CN.md -p THIRD-PARTY-NOTICES.txt -D output
