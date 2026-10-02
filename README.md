@@ -4,9 +4,11 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 
 ## 下载 macOS 版
 
-**[下载 TopxAI Desktop 1.52.3（Apple Silicon）](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.52.3-macOS-arm64.dmg)**
+**[下载 TopxAI Desktop 1.52.4（Apple Silicon）](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.52.4-macOS-arm64.dmg)**
 
 [查看发布说明与全部附件](https://github.com/UnbelievableT/topxai-releases/releases/latest)
+
+仅保留最新版安装包及其校验文件；历史版本保留发布记录，不再提供旧安装包下载。
 
 - 适用于 Apple Silicon（M 系列），要求 macOS 15 或更高版本；当前实机验证环境为 macOS 27。
 - 下载约 1.8 GB，包含内置工具运行环境。此包不适用于 Intel Mac 或 Windows。
@@ -20,6 +22,6 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 
 ## 更新与反馈
 
-可在设置中检查官方最新版本并打开下载链接，当前通过新版 DMG 手动更新；请先退出旧版再替换应用。1.52.0 或 1.52.1 的旧更新检查无法在线修正，请先从本页手动升级到 1.52.3。电脑控制、屏幕录制和麦克风权限由用户另行授权。
+可在设置中检查官方最新版本并打开下载链接，当前通过新版 DMG 手动更新；请先退出旧版再替换应用。1.52.0 或 1.52.1 的旧更新检查无法在线修正，请先从本页手动升级到 1.52.4。电脑控制、屏幕录制和麦克风权限由用户另行授权。
 
 遇到问题时，请提供应用版本、macOS 版本、芯片型号和错误提示；不要公开密码、API 密钥或私人会话内容。

@@ -99,17 +99,18 @@ jobs:
           import hashlib,json,os
           from pathlib import Path
           def sha(p): return hashlib.file_digest(p.open('rb'),'sha256').hexdigest()
-          out=Path('output');files=sorted(out.iterdir())
-          (out/'SHA256SUMS').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in files))
+          out=Path('output')
           dmg=out/os.environ['TARGET_DMG']
           proof={'version':json.loads(Path('verified-app-manifest.json').read_text())['version'],'dmgSha256':sha(dmg),'dmgBytes':dmg.stat().st_size,'appManifestSha256':sha(Path('verified-app-manifest.json')),'allAppFilesVerified':True,'mountedImageVerified':True,'deepStrictSignatureVerified':True,'workflowRun':os.environ['GITHUB_RUN_ID']}
-          Path('reconstruction-verification.json').write_text(json.dumps(proof,indent=2)+'\n')
+          (out/'reconstruction-verification.json').write_text(json.dumps(proof,indent=2)+'\n')
+          files=sorted(p for p in out.iterdir() if p.name!='SHA256SUMS')
+          (out/'SHA256SUMS').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in files))
           PY
       - name: Upload verified installer to the draft release
         run: |
           set -euo pipefail
           test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
-          gh release upload "$RELEASE_TAG" "output/$TARGET_DMG" output/SHA256SUMS reconstruction-verification.json --clobber
+          gh release upload "$RELEASE_TAG" "output/$TARGET_DMG" output/SHA256SUMS output/reconstruction-verification.json --clobber
   verify-public-assets:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
