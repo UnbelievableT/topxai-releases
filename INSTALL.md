@@ -1,8 +1,10 @@
-# Installing TopxAI Desktop 1.54.0 on macOS
+# Installing TopxAI Desktop 1.54.1 on macOS
 
-Release: `v1.54.0-macos.20261030`. Download it from [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases).
+Release: `v1.54.1-macos.20261030`. Download it from [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases).
 
-This version adds two built-in capabilities. Coding workflows come from ECC and are managed under Settings, Advanced. Memory is based on claude-mem and is stored on this Mac; every TopxAI account signed in on the same Mac uses the same memory. Automatic capture is off until you turn it on in Settings, Memory, where you can also review and delete what was saved.
+1.54.1 is a faster 1.54: the window appears while the backend starts, long chats scroll and stream smoothly, and Settings, navigation and theme changes respond at once.
+
+Since 1.54.0 the app has two built-in capabilities. Coding workflows come from ECC and are managed under Settings, Advanced. Memory is based on claude-mem and is stored on this Mac; every TopxAI account signed in on the same Mac uses the same memory. Automatic capture is off until you turn it on in Settings, Memory, where you can also review and delete what was saved.
 
 ## Requirements
 
@@ -13,7 +15,7 @@ This version adds two built-in capabilities. Coding workflows come from ECC and 
 
 ## Install and first launch
 
-1. Download `TopxAI-1.54.0-macOS-arm64.dmg`.
+1. Download `TopxAI-1.54.1-macOS-arm64.dmg`.
 2. Quit any older TopxAI completely, open the DMG, drag `TopxAI Desktop.app` into Applications, and start it from Applications. Don't run two versions at once.
 3. On first launch macOS asks whether to open an app downloaded from the Internet. Check that it names TopxAI Desktop and click **Open**.
 
@@ -21,9 +23,13 @@ If macOS says it cannot verify the developer, cannot check the app for malware, 
 
 The first launch asks for a display language: English by default, or 简体中文, 日本語, Русский, Español. You can change it later in Settings. A language chosen in an earlier version is kept.
 
+## Upgrading from 1.54.0
+
+Quit TopxAI, then replace the app in Applications with the new one. Chats, settings, memory and the Screen Recording and Accessibility grants carry over, because both versions carry the same signature.
+
 ## Upgrading from 1.52.x
 
-Chats from 1.52.x do not appear in 1.54.0: the chat database has a new structure and is not converted. On first launch the new version copies the old database in full to `~/.local/share/topxai-desktop/sessions/sessions-v21-<time>.db` and then starts a new one. The copy is never deleted automatically.
+Chats from 1.52.x do not appear in 1.54.x: the chat database has a new structure and is not converted. On first launch the new version copies the old database in full to `~/.local/share/topxai-desktop/sessions/sessions-v21-<time>.db` and then starts a new one. The copy is never deleted automatically.
 
 Settings such as the default model may return to their defaults. If you see the sign-in page after upgrading, sign in again. Memory saved per account in the old version is merged into this Mac's memory, and the original files stay untouched.
 
@@ -46,6 +52,6 @@ Put the release's `SHA256SUMS` file in the same folder as the DMG, open Terminal
 shasum -a 256 -c SHA256SUMS
 ```
 
-`TopxAI-1.54.0-macOS-arm64.dmg: OK` means the file is intact. The command only reads files. Don't use a checksum file from another version.
+`TopxAI-1.54.1-macOS-arm64.dmg: OK` means the file is intact. The command only reads files. Don't use a checksum file from another version.
 
 When reporting an installation problem, include your macOS version, chip, app version and the error message. Never include passwords, API keys or private chat content.

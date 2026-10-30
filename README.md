@@ -6,7 +6,7 @@ Public installers and installation instructions for TopxAI Desktop. This reposit
 
 ## Download for macOS
 
-**[Download TopxAI Desktop 1.54.0 (Apple silicon)](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.54.0-macOS-arm64.dmg)**
+**[Download TopxAI Desktop 1.54.1 (Apple silicon)](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.54.1-macOS-arm64.dmg)**
 
 [Release notes and all files](https://github.com/UnbelievableT/topxai-releases/releases/latest)
 
@@ -24,6 +24,6 @@ Every release includes a `SHA256SUMS` file. Don't install from the "Source code"
 
 ## Updates and feedback
 
-Settings can check for the latest official version and open its download link. For now, update by installing the new DMG: quit the old version first, then replace the app. Chats from 1.52.x do not appear in 1.54.0; the old chat database is first copied in full on your Mac (see the installation instructions). After upgrading from an earlier version, grant Screen Recording and Accessibility once more; later updates keep these grants.
+Settings can check for the latest official version and open its download link. For now, update by installing the new DMG: quit the old version first, then replace the app. Chats from 1.52.x do not appear in 1.54.x; the old chat database is first copied in full on your Mac (see the installation instructions). After upgrading from an earlier version, grant Screen Recording and Accessibility once more; later updates keep these grants.
 
 When reporting a problem, include the app version, macOS version, chip and the error message. Never post passwords, API keys or private chat content.
