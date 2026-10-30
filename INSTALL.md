@@ -1,48 +1,51 @@
-# Install TopxAI Desktop 1.52.4 on macOS
+# Installing TopxAI Desktop 1.54.0 on macOS
 
-Download the application from [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases/tag/v1.52.4-macos.20261002). This release fixes skill loading, Code Mode tool visibility and structured workflow completion. It adds regression coverage for every bundled skill package and extension loading path. Updates use a **manual DMG upgrade**. It does not automatically download or install an update.
+Release: `v1.54.0-macos.20261030`. Download it from [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases).
 
-## Requirements and signing
+This version adds two built-in capabilities. Coding workflows come from ECC and are managed under Settings, Advanced. Memory is based on claude-mem and is stored on this Mac; every TopxAI account signed in on the same Mac uses the same memory. Automatic capture is off until you turn it on in Settings, Memory, where you can also review and delete what was saved.
 
-- **Apple Silicon (M series), macOS 15 or later.** This installer does not support Intel Macs or Windows.
-- Native verification was performed on **macOS 27 Apple Silicon**. The minimum version is a build requirement; macOS 15 and every supported Mac model have not been tested on physical devices.
-- The application is **ad-hoc signed, not signed with an Apple Developer ID, and not notarized by Apple**. You may need to approve it in macOS before opening it for the first time.
-- The installer is about **1.7 GB** because it includes the runtime for built-in tools. External applications, service accounts, and operating-system permissions may still be required for specific features.
+## Requirements
 
-## Install or update
+- Apple Silicon (arm64) with macOS 15.0 or later. This package does not run on Intel Macs or Windows.
+- The download is about 1.7 GB and the installed app about 4.2 GB, mostly the bundled tool runtime (Python, Node.js, LibreOffice, Blender, Chromium and others), so most built-in tools need no separate install.
+- Hands-on testing was done on macOS 27.0.1 (Apple M4 Max) only. The macOS 15 minimum comes from the build settings and has not been checked on a macOS 15 machine.
+- The app is signed with an Apple Developer ID (YULUN XUE, ADZG57QP62) and notarized by Apple.
 
-1. Download `TopxAI-1.52.4-macOS-arm64.dmg` from the release page. Do not use GitHub's automatically generated “Source code” archives; those contain the download repository's documentation, not the application.
-2. Quit any running version of TopxAI. Open the DMG and drag `TopxAI Desktop.app` into **Applications**. Replace the older application if updating, then launch it from Applications. Avoid running multiple copies at once.
-3. If macOS blocks the application because the developer cannot be verified, dismiss the message and open **System Settings → Privacy & Security**. Find the message about TopxAI and select **Open Anyway**.
-4. Complete the system's password or Touch ID confirmation and choose **Open** when prompted. This grants an exception for this application; do not disable Gatekeeper globally and do not run `sudo xattr` commands. See [Apple's official instructions](https://support.apple.com/en-us/102445).
+## Install and first launch
 
-If “Open Anyway” is not present, first confirm that you tried to launch the application. A managed Mac may require help from your administrator. If macOS says the app is damaged or will harm your computer, stop, verify the download source and checksum, and report the message.
+1. Download `TopxAI-1.54.0-macOS-arm64.dmg`.
+2. Quit any older TopxAI completely, open the DMG, drag `TopxAI Desktop.app` into Applications, and start it from Applications. Don't run two versions at once.
+3. On first launch macOS asks whether to open an app downloaded from the Internet. Check that it names TopxAI Desktop and click **Open**.
 
-**Users of 1.52.0 or 1.52.1 need to download 1.52.4 manually to receive the update-check fix.** In 1.52.2 and later, Settings can check the official public release and open its download link. Installation still requires quitting the old version and replacing the application manually.
+If macOS says it cannot verify the developer, cannot check the app for malware, or that the app is damaged, don't work around it: stop, check the download against the checksum below, and report it. A Mac managed by an organization may need its administrator.
 
-## First launch and language
+The first launch asks for a display language: English by default, or 简体中文, 日本語, Русский, Español. You can change it later in Settings. A language chosen in an earlier version is kept.
 
-A fresh installation starts with an **English** language-selection screen, regardless of the system language. Choose from 5 languages: English, Simplified Chinese, Japanese, Russian, and Spanish. Select **Continue** to save your choice and reach sign-in. Your confirmed choice is retained after restart and can be changed later in Settings. Existing users keep a supported saved language and skip the first-launch selection. Previously confirmed languages that are no longer supported, including the old system-language option, fall back to English without repeating setup.
+## Upgrading from 1.52.x
+
+Chats from 1.52.x do not appear in 1.54.0: the chat database has a new structure and is not converted. On first launch the new version copies the old database in full to `~/.local/share/topxai-desktop/sessions/sessions-v21-<time>.db` and then starts a new one. The copy is never deleted automatically.
+
+Settings such as the default model may return to their defaults. If you see the sign-in page after upgrading, sign in again. Memory saved per account in the old version is merged into this Mac's memory, and the original files stay untouched.
 
 ## Permissions for computer control
 
-Allowing the app to open **does not grant computer-control permissions**. For computer-control tasks, use **System Settings → Privacy & Security** to allow:
+Opening the app does not grant computer control. When you want TopxAI to operate your Mac, allow it in **System Settings**, **Privacy & Security**:
 
-- **Accessibility:** permits clicks, typing, and interaction with applications. If TopxAI is missing from the list, use **+** to add the copy in Applications.
-- **Screen Recording / Screen & System Audio Recording:** permits reading screen content. The exact label varies by macOS version.
+- **Accessibility**, for clicking and typing. If TopxAI isn't listed, add it from Applications with the + button.
+- **Screen Recording** (named Screen & System Audio Recording on newer systems), for reading the screen.
 
-Microphone and project-folder access are requested separately when needed. If macOS asks you to quit and reopen the app after a permission change, follow that prompt, then recheck permissions in TopxAI.
+Earlier versions had no stable signature, so after upgrading from 1.52.x or 1.53.x grant these two once more: if TopxAI is already switched on in a list, remove it with the − button and add it again. From 1.54.0 on, every version carries the same signature, so updates keep these grants.
 
-## Verify the download
+Microphone and project folder access are requested when a feature needs them. If macOS asks you to quit and reopen the app, do so, then check the permissions again in TopxAI. Apple explains [Accessibility](https://support.apple.com/guide/mac-help/mh43185/mac) and [Screen Recording](https://support.apple.com/guide/mac-help/mchl592e5686/mac) access.
 
-Download this release's `SHA256SUMS` file into the same folder as the DMG. In Terminal, open that folder and run:
+## Checking the download
+
+Put the release's `SHA256SUMS` file in the same folder as the DMG, open Terminal in that folder and run:
 
 ```sh
 shasum -a 256 -c SHA256SUMS
 ```
 
-The result should include `TopxAI-1.52.4-macOS-arm64.dmg: OK`. This command only reads and verifies the file; it does not change security settings. Do not use another release's checksum file.
+`TopxAI-1.54.0-macOS-arm64.dmg: OK` means the file is intact. The command only reads files. Don't use a checksum file from another version.
 
-Third-party license and source notices are provided in `THIRD-PARTY-NOTICES.txt` and retained inside the application.
-
-When reporting an installation problem, include your macOS version, chip type, app version, and error message. Do not include passwords, API keys, or private conversations.
+When reporting an installation problem, include your macOS version, chip, app version and the error message. Never include passwords, API keys or private chat content.
