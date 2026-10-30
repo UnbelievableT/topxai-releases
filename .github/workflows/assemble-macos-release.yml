@@ -1,0 +1,67 @@
+name: Assemble verified macOS installer
+# The installer is too large to upload from the release machine in one
+# request, so it arrives as git blobs. This joins them, checks every part and
+# the whole file against the notarized installer's SHA-256, and attaches the
+# result to the draft release unchanged.
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        required: true
+        type: string
+      target_dmg:
+        required: true
+        type: string
+      dmg_sha256:
+        required: true
+        type: string
+      index_blob_sha:
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ inputs.release_tag }}
+      TARGET_DMG: ${{ inputs.target_dmg }}
+      DMG_SHA256: ${{ inputs.dmg_sha256 }}
+      INDEX_BLOB_SHA: ${{ inputs.index_blob_sha }}
+    steps:
+      - name: Join and verify the installer parts
+        run: |
+          set -euo pipefail
+          test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
+          python3 - <<'PY'
+          import base64, concurrent.futures, hashlib, json, os, re, subprocess
+          from pathlib import Path
+          def blob(sha):
+              assert re.fullmatch('[0-9a-f]{40}', sha)
+              data = json.loads(subprocess.check_output(['gh', 'api', f"repos/{os.environ['GH_REPO']}/git/blobs/{sha}"]))
+              assert data['encoding'] == 'base64' and data['sha'] == sha
+              return base64.b64decode(data['content'])
+          index = json.loads(blob(os.environ['INDEX_BLOB_SHA']))
+          assert index['format'] == 'topxai-installer-parts-v1'
+          assert index['name'] == os.environ['TARGET_DMG'] and index['sha256'] == os.environ['DMG_SHA256']
+          target = Path(os.environ['TARGET_DMG'])
+          whole = hashlib.sha256()
+          with target.open('wb') as out, concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+              for part, data in zip(index['parts'], pool.map(lambda part: blob(part['blob']), index['parts'])):
+                  assert len(data) == part['bytes'] and hashlib.sha256(data).hexdigest() == part['sha256']
+                  out.write(data)
+                  whole.update(data)
+          assert target.stat().st_size == index['bytes'] and whole.hexdigest() == os.environ['DMG_SHA256']
+          print(json.dumps({'name': target.name, 'bytes': index['bytes'], 'sha256': whole.hexdigest(), 'parts': len(index['parts'])}))
+          PY
+      - name: Attach it to the draft release
+        run: |
+          set -euo pipefail
+          test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
+          gh release upload "$RELEASE_TAG" "$TARGET_DMG" --clobber
+          test "$(gh release view "$RELEASE_TAG" --json assets --jq ".assets[] | select(.name == \"$TARGET_DMG\") | .digest")" = "sha256:$DMG_SHA256"
