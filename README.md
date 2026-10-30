@@ -6,7 +6,7 @@ Public installers and installation instructions for TopxAI Desktop. This reposit
 
 ## Download for macOS
 
-**[Download TopxAI Desktop 1.54.1 (Apple silicon)](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.54.1-macOS-arm64.dmg)**
+**[Download TopxAI Desktop 1.54.2 (Apple silicon)](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.54.2-macOS-arm64.dmg)**
 
 [Release notes and all files](https://github.com/UnbelievableT/topxai-releases/releases/latest)
 
