@@ -6,7 +6,7 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 
 ## 下载 macOS 版
 
-**[下载 TopxAI Desktop 1.54.2（Apple Silicon）](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.54.2-macOS-arm64.dmg)**
+**[下载 TopxAI Desktop 1.55.0（Apple Silicon）](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.55.0-macOS-arm64.dmg)**
 
 [查看发布说明与全部附件](https://github.com/UnbelievableT/topxai-releases/releases/latest)
 
@@ -24,6 +24,6 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 
 ## 更新与反馈
 
-可在设置中检查官方最新版本并打开下载链接，当前通过新版 DMG 手动更新；请先退出旧版再替换应用。1.52.x 的会话记录不会出现在 1.54.x 里，旧会话库会先完整备份在本机，详见安装说明。从旧版升级后，屏幕录制和辅助功能需要重新授权一次，以后的更新会保留这些授权。
+可在设置中检查官方最新版本并打开下载链接，当前通过新版 DMG 手动更新；请先退出旧版再替换应用。1.52.x 的会话记录不会出现在 1.54.0 及以后的版本里，旧会话库会先完整备份在本机，详见安装说明。从 1.54.0 之前的版本升级后，屏幕录制和辅助功能需要重新授权一次，以后的更新会保留这些授权。
 
 遇到问题时，请提供应用版本、macOS 版本、芯片型号和错误提示；不要公开密码、API 密钥或私人会话内容。
