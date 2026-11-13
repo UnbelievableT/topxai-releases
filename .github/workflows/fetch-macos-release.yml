@@ -1,0 +1,55 @@
+name: Fetch verified macOS installer
+# The release machine uploads the installer once, to TopxAI's own download
+# host. This downloads it from there, checks the whole file against the
+# notarized installer's SHA-256, and attaches it to the draft release
+# unchanged. assemble-macos-release.yml remains for installers that arrive
+# as git blobs.
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        required: true
+        type: string
+      target_dmg:
+        required: true
+        type: string
+      dmg_sha256:
+        required: true
+        type: string
+      source_url:
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ inputs.release_tag }}
+      TARGET_DMG: ${{ inputs.target_dmg }}
+      DMG_SHA256: ${{ inputs.dmg_sha256 }}
+      SOURCE_URL: ${{ inputs.source_url }}
+    steps:
+      - name: Download and verify the installer
+        run: |
+          set -euo pipefail
+          test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
+          [[ "$TARGET_DMG" =~ ^TopxAI-[0-9]+\.[0-9]+\.[0-9]+-macOS-(arm64|x64)\.dmg$ ]]
+          [[ "$DMG_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$SOURCE_URL" == "https://api.topxai.xyz/desktop/updates/darwin/"*"/$TARGET_DMG" ]]
+          curl --fail --silent --show-error --location --proto '=https' \
+            --retry 8 --retry-all-errors --retry-delay 10 --continue-at - \
+            --output "$TARGET_DMG" "$SOURCE_URL"
+          echo "$DMG_SHA256  $TARGET_DMG" | sha256sum --check
+          stat --format '{"name": "%n", "bytes": %s}' "$TARGET_DMG"
+      - name: Attach it to the draft release
+        run: |
+          set -euo pipefail
+          test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true
+          gh release upload "$RELEASE_TAG" "$TARGET_DMG" --clobber
+          test "$(gh release view "$RELEASE_TAG" --json assets --jq ".assets[] | select(.name == \"$TARGET_DMG\") | .digest")" = "sha256:$DMG_SHA256"
