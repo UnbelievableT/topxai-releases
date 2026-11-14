@@ -6,7 +6,7 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 
 ## 下载 macOS 版
 
-**[下载 TopxAI Desktop 1.57.0（Apple Silicon）](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.57.0-macOS-arm64.dmg)**
+**[下载 TopxAI Desktop 1.58.0（Apple Silicon）](https://github.com/UnbelievableT/topxai-releases/releases/latest/download/TopxAI-1.58.0-macOS-arm64.dmg)**
 
 [查看发布说明与全部附件](https://github.com/UnbelievableT/topxai-releases/releases/latest)
 
@@ -24,8 +24,10 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 
 ## 更新与反馈
 
-从 1.57.0 起应用会自己更新：启动时查一次新版本，之后每四小时查一次，在后台下载，下次退出时安装。1.56.0 和更早的版本只会打开下载链接，所以升到 1.57.0 这一步要手动做：先退出旧版，再用新 DMG 里的应用替换它。
+从 1.57.0 起应用会自己更新：启动时查一次新版本，之后每四小时查一次，在后台下载，下次退出时安装。1.57.0 就是这样装上 1.58.0 的。1.56.0 和更早的版本只会打开下载链接，这一步要手动做：先退出旧版，再用新 DMG 里的应用替换它。
 
-1.57.0 用的是 TopxAI 的新地址 `api.topxai.xyz`，macOS 上的应用标识也换了。装好后要再登录一次，屏幕录制和辅助功能也要重新授权一次；会话、设置和记忆都会保留，以后的更新不用再授权。从 1.55.0 或更早的版本升级时，还会把会话库和记忆库合并成一个，旧版本打不开合并后的库。要退回旧版，得用 `sessions/before-merge/` 里保留 7 天的原文件，或者安装前做的备份，详见安装说明。
+从 1.57.0 起，应用用的是 TopxAI 的新地址 `api.topxai.xyz`，macOS 上的应用标识也换了。从 1.56.0 或更早的版本升级，装好后要再登录一次，屏幕录制和辅助功能也要重新授权一次；会话、设置和记忆都会保留，以后的更新不用再授权。从 1.55.0 或更早的版本升级时，还会把会话库和记忆库合并成一个，旧版本打不开合并后的库。要退回旧版，得用 `sessions/before-merge/` 里保留 7 天的原文件，或者安装前做的备份，详见安装说明。
+
+1.58.0 去掉了按地址、经 SSH 或经协调服务连接其他电脑的方式，在 1.57.0 里这样加过的电脑升级后不再列出。以后其他电脑改走 TopxAI 的中继，1.58.0 还没有打开中继。
 
 遇到问题时，请发邮件到 support@topxai.xyz，写明应用版本、macOS 版本、芯片型号和错误提示；不要公开密码、API 密钥或私人会话内容。
