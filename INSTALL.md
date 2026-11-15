@@ -1,19 +1,19 @@
-# Installing TopxAI Desktop 1.58.0 on macOS
+# Installing TopxAI Desktop 1.59.0 on macOS
 
-Release: `v1.58.0-macos.20261115`. Download it from [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases).
+Release: `v1.59.0-macos.20261115`. Download it from [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases).
 
-1.58.0 is the first version that 1.57.0 installs by itself, so most people get it without this guide. Read on if you install by hand, or if you come from 1.56.0 or earlier, whose app had another macOS identifier: you sign in once more and grant the system permissions again. "Upgrading from 1.56.0" below lists each step.
+1.57.0 and 1.58.0 install 1.59.0 by themselves, so most people get it without this guide. Read on if you install by hand, or if you come from 1.56.0 or earlier, whose app had another macOS identifier: you sign in once more and grant the system permissions again. "Upgrading from 1.56.0" below lists each step.
 
 ## Requirements
 
 - Apple Silicon (arm64) with macOS 15.0 or later. This package does not run on Intel Macs or Windows.
-- The download is about 1.7 GB and the installed app about 4.2 GB, mostly the bundled tool runtime (Python, Node.js, LibreOffice, Blender, Chromium and others), so most built-in tools need no separate install.
+- The download is about 1.6 GB and the installed app about 4.2 GB, mostly the bundled tool runtime (Python, Node.js, LibreOffice, Blender, Chromium and others), so most built-in tools need no separate install.
 - Its package, signature and notarization were checked on macOS 27.0.1 (Apple M4 Max), and a packaged copy was started there; the features were not tested one by one. The macOS 15 minimum comes from the build settings and has not been checked on a macOS 15 machine.
 - The app is signed with an Apple Developer ID (YULUN XUE, ADZG57QP62) and notarized by Apple.
 
 ## Install and first launch
 
-1. Download `TopxAI-1.58.0-macOS-arm64.dmg`.
+1. Download `TopxAI-1.59.0-macOS-arm64.dmg`.
 2. Quit any older TopxAI completely, open the DMG, drag `TopxAI Desktop.app` into Applications, and start it from Applications. Don't run two versions at once.
 3. On first launch macOS asks whether to open an app downloaded from the Internet. Check that it names TopxAI Desktop and click **Open**.
 
@@ -21,19 +21,21 @@ If macOS says it cannot verify the developer, cannot check the app for malware, 
 
 The first launch asks for a display language: English by default, or 简体中文, 日本語, Русский, Español. You can change it later in Settings. A language chosen in an earlier version is kept.
 
-## Upgrading from 1.57.0
+## Upgrading from 1.57.0 or 1.58.0
 
-Nothing to do. 1.57.0 downloads 1.58.0 in the background and installs it when you quit, or after five minutes of inactivity when no chat or scheduled work needs the app. **Install & restart** in Settings installs it at once. Your sign-in and the permissions you granted stay, because both versions carry the same identifier and signature.
+Nothing to do. The app downloads 1.59.0 in the background and installs it when you quit, or after five minutes of inactivity when no chat or scheduled work needs the app. **Install & restart** in Settings installs it at once. Your sign-in and the permissions you granted stay, because these versions carry the same identifier and signature.
 
-Other computers you added in 1.57.0 by address, over SSH or through the coordinator are no longer listed: 1.58.0 removed those connections. Other computers will come back through TopxAI's relay, which this version does not switch on yet.
+1.59.0 turns on the link to TopxAI's relay, which 1.58.0 left off. Other computers signed in to your account and the web edition reach this computer through it (Settings > Computers). To keep the link off, add the line `TOPXAI_RELAY_LINK: false` to `~/.config/topxai-desktop/config.yaml` and restart the app.
+
+Coming from 1.57.0, the computers you added there by address, over SSH or through the coordinator are not listed: 1.58.0 removed those connections.
 
 ## Upgrading from 1.56.0
 
 1.56.0 does not install updates by itself. It tells you that a new version is available and opens the download in your browser. Quit TopxAI, then replace the app in Applications with the new one.
 
-After the first launch of 1.58.0:
+After the first launch of 1.59.0:
 
-- **Sign in again.** The account 1.56.0 stored belongs to the old address, so 1.58.0 starts signed out. Your balance, keys and purchases are on the account and are there once you sign in.
+- **Sign in again.** The account 1.56.0 stored belongs to the old address, so 1.59.0 starts signed out. Your balance, keys and purchases are on the account and are there once you sign in.
 - **Grant Accessibility and Screen Recording again** if you use computer control, as described under "Permissions for computer control". The entry left by 1.56.0 no longer applies to the new app.
 - **Allow notifications again** when macOS asks.
 - **Turn "Start in the background at login" on again** in Settings if you had it on for on-duty Agents, and allow TopxAI under Login Items in System Settings.
@@ -49,7 +51,7 @@ An upgrade straight from 1.52.x has not been tried; chats from 1.52.x may not ap
 
 ## Updates from now on
 
-1.58.0 checks `api.topxai.xyz` for a newer version when it starts and every four hours. A new version downloads in the background and installs when you next quit, or after five minutes of inactivity when no chat or scheduled work needs the app. Settings has **Download updates automatically** to turn the background download off, and **Install & restart** to install at once.
+1.59.0 checks `api.topxai.xyz` for a newer version when it starts and every four hours. A new version downloads in the background and installs when you next quit, or after five minutes of inactivity when no chat or scheduled work needs the app. Settings has **Download updates automatically** to turn the background download off, and **Install & restart** to install at once.
 
 If the update address cannot be reached, the app offers the DMG from the latest GitHub release instead, to be installed by hand as above.
 
@@ -72,6 +74,6 @@ Put the release's `SHA256SUMS` file in the same folder as the DMG, open Terminal
 shasum -a 256 -c SHA256SUMS
 ```
 
-`TopxAI-1.58.0-macOS-arm64.dmg: OK` means the file is intact. The command only reads files. Don't use a checksum file from another version.
+`TopxAI-1.59.0-macOS-arm64.dmg: OK` means the file is intact. The command only reads files. Don't use a checksum file from another version.
 
 When reporting an installation problem, write to support@topxai.xyz with your macOS version, chip, app version and the error message. Never include passwords, API keys or private chat content.
