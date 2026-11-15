@@ -2,7 +2,7 @@
 
 Release: `v1.59.0-macos.20261115`. Download it from [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases).
 
-1.57.0 and 1.58.0 install 1.59.0 by themselves, so most people get it without this guide. Read on if you install by hand, or if you come from 1.56.0 or earlier, whose app had another macOS identifier: you sign in once more and grant the system permissions again. "Upgrading from 1.56.0" below lists each step.
+Automatic updates do not work for now, so everyone installs 1.59.0 from the DMG as described here. Coming from 1.56.0 or earlier, whose app had another macOS identifier, you also sign in once more and grant the system permissions again. "Upgrading from 1.56.0" below lists each step.
 
 ## Requirements
 
@@ -23,7 +23,9 @@ The first launch asks for a display language: English by default, or 简体中�
 
 ## Upgrading from 1.57.0 or 1.58.0
 
-Nothing to do. The app downloads 1.59.0 in the background and installs it when you quit, or after five minutes of inactivity when no chat or scheduled work needs the app. **Install & restart** in Settings installs it at once. Your sign-in and the permissions you granted stay, because these versions carry the same identifier and signature.
+Quit TopxAI and replace the app in Applications with the one in the DMG, as above. Your sign-in and the permissions you granted stay, because these versions carry the same identifier and signature.
+
+These versions do not install 1.59.0 by themselves. The update framework the app uses (Squirrel.Mac) keeps the whole update in memory, and with an update of 1.6 GB the app crashes as the download finishes; 1.57.0 could not install 1.58.0 for the same reason. Since 2026-11-15 09:25 UTC the update address offers no newer version, so an app that crashed like this starts normally again. The download it left in `~/Library/Caches/topxai-desktop-updater` (about 3.3 GB) can be deleted.
 
 1.59.0 turns on the link to TopxAI's relay, which 1.58.0 left off. Other computers signed in to your account and the web edition reach this computer through it (Settings > Computers). To keep the link off, add the line `TOPXAI_RELAY_LINK: false` to `~/.config/topxai-desktop/config.yaml` and restart the app.
 
@@ -49,9 +51,9 @@ Follow the steps for 1.56.0 above. In addition, the first launch merges the chat
 
 An upgrade straight from 1.52.x has not been tried; chats from 1.52.x may not appear.
 
-## Updates from now on
+## Updates
 
-1.59.0 checks `api.topxai.xyz` for a newer version when it starts and every four hours. A new version downloads in the background and installs when you next quit, or after five minutes of inactivity when no chat or scheduled work needs the app. Settings has **Download updates automatically** to turn the background download off, and **Install & restart** to install at once.
+1.59.0 checks `api.topxai.xyz` for a newer version when it starts and every four hours, but it has the same limit as 1.57.0 and 1.58.0. Until that is fixed, the update address offers no newer version and new versions are installed from the DMG as above. **Download updates automatically** and **Install & restart** in Settings have nothing to act on for now.
 
 If the update address cannot be reached, the app offers the DMG from the latest GitHub release instead, to be installed by hand as above.
 
@@ -62,7 +64,7 @@ Opening the app does not grant computer control. When you want TopxAI to operate
 - **Accessibility**, for clicking and typing. If TopxAI isn't listed, add it from Applications with the + button.
 - **Screen Recording** (named Screen & System Audio Recording on newer systems), for reading the screen.
 
-After upgrading from 1.56.0 or earlier, grant these two once more: if a TopxAI entry is already in a list, remove it with the − button and add the app again from Applications. Updates from 1.57.0 on keep the grants, because those versions carry the same identifier and signature.
+After upgrading from 1.56.0 or earlier, grant these two once more: if a TopxAI entry is already in a list, remove it with the − button and add the app again from Applications. Replacing 1.57.0 or later keeps the grants, because those versions carry the same identifier and signature.
 
 Project folder access is requested when a feature needs it. If macOS asks you to quit and reopen the app, do so, then check the permissions again in TopxAI. Apple explains [Accessibility](https://support.apple.com/guide/mac-help/mh43185/mac) and [Screen Recording](https://support.apple.com/guide/mac-help/mchl592e5686/mac) access.
 
