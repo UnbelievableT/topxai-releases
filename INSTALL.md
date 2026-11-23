@@ -1,20 +1,20 @@
-# Installing TopxAI Desktop 1.66.0 on macOS
+# Installing TopxAI Desktop 1.66.1 on macOS
 
-Release: `v1.66.0-macos.20261123`. Download the DMG from `https://dl.topxai.xyz/desktop/updates/darwin/arm64/TopxAI-1.66.0-macOS-arm64.dmg` or from https://topxai.xyz. The release on [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases) carries the notes and these guides only, not the installer.
+Release: `v1.66.1-macos.20261123`. Download the DMG from `https://dl.topxai.xyz/desktop/updates/darwin/arm64/TopxAI-1.66.1-macOS-arm64.dmg` or from https://topxai.xyz. The release on [TopxAI Releases](https://github.com/UnbelievableT/topxai-releases/releases) carries the notes and these guides only, not the installer.
 
-1.57.0 to 1.65.0 update themselves to 1.66.0 ("Upgrading from 1.57.0 to 1.65.0" below); everyone else installs it from the DMG as described here. Coming from 1.56.0 or earlier, whose app had another macOS identifier, you also sign in once more and grant the system permissions again. "Upgrading from 1.56.0" below lists each step.
+1.57.0 to 1.66.0 update themselves to 1.66.1 ("Upgrading from 1.57.0 to 1.66.0" below); everyone else installs it from the DMG as described here. Coming from 1.56.0 or earlier, whose app had another macOS identifier, you also sign in once more and grant the system permissions again. "Upgrading from 1.56.0" below lists each step.
 
 ## Requirements
 
 - Apple Silicon (arm64) with macOS 15.0 or later. This package does not run on Intel Macs or Windows.
-- The DMG is about 790 MB and the installed app about 1.17 GB. The tool runtime (Python, Node.js, LibreOffice, Blender, Chromium and others) is not inside the app: TopxAI downloads it from `dl.topxai.xyz`, about 1.32 GB, and unpacks it to about 3.19 GB in `~/.local/share/topxai-desktop/runtimes/`. Keep about 5 GB free for that; the download is deleted once it is unpacked. Chats work meanwhile. Documents, browser tasks, computer control and 3D work start once the tools are installed, and Skills shows how far the download is. A download cut off by quitting or by losing the network continues where it stopped.
-- 1.66.0 uses the same runtime as 1.63.0 to 1.65.0 (2026.11.20.1). A Mac that already runs one of them keeps the runtime it downloaded and downloads nothing more after the update.
+- The DMG is about 780 MB and the installed app about 1.17 GB. The tool runtime (Python, Node.js, LibreOffice, Blender, Chromium and others) is not inside the app: TopxAI downloads it from `dl.topxai.xyz`, about 1.32 GB, and unpacks it to about 3.19 GB in `~/.local/share/topxai-desktop/runtimes/`. Keep about 5 GB free for that; the download is deleted once it is unpacked. Chats work meanwhile. Documents, browser tasks, computer control and 3D work start once the tools are installed, and Skills shows how far the download is. A download cut off by quitting or by losing the network continues where it stopped.
+- 1.66.1 uses the same runtime as 1.63.0 to 1.66.0 (2026.11.20.1). A Mac that already runs one of them keeps the runtime it downloaded and downloads nothing more after the update.
 - Its package, signature and notarization were checked on 2026-11-23. The macOS 15 minimum comes from the build settings and has not been checked on a macOS 15 machine.
 - The app is signed with an Apple Developer ID (YULUN XUE, ADZG57QP62) and notarized by Apple.
 
 ## Install and first launch
 
-1. Download `TopxAI-1.66.0-macOS-arm64.dmg`.
+1. Download `TopxAI-1.66.1-macOS-arm64.dmg`.
 2. Quit any older TopxAI completely, open the DMG, drag `TopxAI Desktop.app` into Applications, and start it from Applications. Don't run two versions at once.
 3. On first launch macOS asks whether to open an app downloaded from the Internet. Check that it names TopxAI Desktop and click **Open**.
 
@@ -22,25 +22,25 @@ If macOS says it cannot verify the developer, cannot check the app for malware, 
 
 The first launch asks for a display language: English by default, or 简体中文, 日本語, Русский, Español. You can change it later in Settings. A language chosen in an earlier version is kept.
 
-## Upgrading from 1.57.0 to 1.65.0
+## Upgrading from 1.57.0 to 1.66.0
 
-These versions are offered 1.66.0 when they check for updates, at start and every four hours. They download it in the background (471 MB) and install it when you quit TopxAI, or at once with **Install & restart** in Settings. On 1.64.0 and 1.65.0 the row above your account in the sidebar shows the download and the preparation, then that 1.66.0 is ready, with **Restart now**. You can also quit TopxAI and replace the app in Applications with the one in the DMG, as above. Either way your sign-in and the permissions you granted stay, because these versions carry the same identifier and signature.
+These versions are offered 1.66.1 when they check for updates, at start and every four hours. They download it in the background (471 MB) and install it when you quit TopxAI, or at once with **Install & restart** in Settings. On 1.64.0 to 1.66.0 the row above your account in the sidebar shows the download and the preparation, then that 1.66.1 is ready, with **Restart now**. You can also quit TopxAI and replace the app in Applications with the one in the DMG, as above. Either way your sign-in and the permissions you granted stay, because these versions carry the same identifier and signature.
 
-A 1.65.0 updated itself to 1.66.0 in a test, through a local copy of the update address: it downloaded the whole update, macOS prepared it, and after the restart 1.66.0 ran with the tool runtime 1.65.0 had downloaded. 1.57.0 to 1.64.0 were not tried with 1.66.0.
+A 1.66.0 updated itself to 1.66.1 in a test, through a local copy of the update address: it downloaded the whole update, macOS prepared it, and after the restart 1.66.1 ran with the tool runtime 1.66.0 had downloaded. 1.57.0 to 1.65.0 were not tried with 1.66.1.
 
 If macOS asks for an administrator's password while TopxAI installs an update, your account cannot change the app where it is. Enter the password, or quit TopxAI and replace the app with the one in the DMG.
 
-On 1.63.0, the update is not ready the moment its download ends: macOS takes a few more minutes to unpack and check it. During that time **Install & restart** shows nothing, and quitting leaves 1.66.0 to install only when you click **Install & restart** again. 1.64.0 and later fix this, but the update from 1.63.0 still runs 1.63.0's updater. If 1.66.0 does not install, quit TopxAI and replace the app with the one in the DMG.
+On 1.63.0, the update is not ready the moment its download ends: macOS takes a few more minutes to unpack and check it. During that time **Install & restart** shows nothing, and quitting leaves 1.66.1 to install only when you click **Install & restart** again. 1.64.0 and later fix this, but the update from 1.63.0 still runs 1.63.0's updater. If 1.66.1 does not install, quit TopxAI and replace the app with the one in the DMG.
 
-Coming from 1.57.0, 1.58.0 or 1.59.0, 1.66.0 downloads its tool runtime after the update, as described under "Requirements": the old runtime was inside the old app. The update-related notes of the 1.63.0 guide apply to them too: phones pair from the web edition, your own computers reach each other without approval, and Grok's command-line tool is no longer an Agent.
+Coming from 1.57.0, 1.58.0 or 1.59.0, 1.66.1 downloads its tool runtime after the update, as described under "Requirements": the old runtime was inside the old app. The update-related notes of the 1.63.0 guide apply to them too: phones pair from the web edition, your own computers reach each other without approval, and Grok's command-line tool is no longer an Agent.
 
 ## Upgrading from 1.56.0
 
 1.56.0 does not install updates by itself. It tells you that a new version is available and opens the download in your browser. Quit TopxAI, then replace the app in Applications with the new one.
 
-After the first launch of 1.66.0:
+After the first launch of 1.66.1:
 
-- **Sign in again.** The account 1.56.0 stored belongs to the old address, so 1.66.0 starts signed out. Your balance, keys and purchases are on the account and are there once you sign in.
+- **Sign in again.** The account 1.56.0 stored belongs to the old address, so 1.66.1 starts signed out. Your balance, keys and purchases are on the account and are there once you sign in.
 - **Grant Accessibility and Screen Recording again** if you use computer control, as described under "System permissions". The entry left by 1.56.0 no longer applies to the new app.
 - **Allow notifications again** when macOS asks.
 - **Turn "Start in the background at login" on again** in Settings if you had it on, and allow TopxAI under Login Items in System Settings.
@@ -56,7 +56,7 @@ An upgrade straight from 1.52.x has not been tried; chats from 1.52.x may not ap
 
 ## Updates
 
-1.66.0 checks `https://dl.topxai.xyz/desktop/updates/darwin/arm64/` for a newer version when it starts and every four hours. It downloads a newer version in the background; with **Download updates automatically** off, it downloads only when you choose. A row above your account in the sidebar shows the download and the preparation, then "is ready · Restart now"; one notice tells you once, and the tray menu and Settings › Updates can restart too. A click while the update is being prepared restarts TopxAI as soon as the update is ready. A version goes into the update address only after an update from the version before it has installed itself in a test.
+1.66.1 checks `https://dl.topxai.xyz/desktop/updates/darwin/arm64/` for a newer version when it starts and every four hours. It downloads a newer version in the background; with **Download updates automatically** off, it downloads only when you choose. A row above your account in the sidebar shows the download and the preparation, then "is ready · Restart now"; one notice tells you once, and the tray menu and Settings › Updates can restart too. A click while the update is being prepared restarts TopxAI as soon as the update is ready. A version goes into the update address only after an update from the version before it has installed itself in a test.
 
 If TopxAI cannot restart into the new version, the window says so at once, with **Try again** and **Download the full installer**, and TopxAI keeps working as before. The install TopxAI makes by itself while you are away waits for a command left running in one of its terminals.
 
@@ -79,12 +79,12 @@ Project folder access is requested when a feature needs it. If macOS asks you to
 
 ## Checking the download
 
-The DMG's SHA-256 is `49730afb9c7df9b41c1f2ee3ec8f21b88dd413dd1f6e0ba6fad293d1c3e0258d`, also listed in `https://dl.topxai.xyz/desktop/updates/darwin/arm64/SHA256SUMS-1.66.0`. Open Terminal in the folder that holds the DMG and run:
+The DMG's SHA-256 is `c8d52b0505332b5a04d0f868dc6f97d530303573859da6383cea7d4aaf5f7e40`, also listed in `https://dl.topxai.xyz/desktop/updates/darwin/arm64/SHA256SUMS-1.66.1`. Open Terminal in the folder that holds the DMG and run:
 
 ```sh
-shasum -a 256 TopxAI-1.66.0-macOS-arm64.dmg
+shasum -a 256 TopxAI-1.66.1-macOS-arm64.dmg
 ```
 
-The value must equal the DMG's line in `SHA256SUMS-1.66.0`. The command only reads the file. Don't compare with a checksum from another version.
+The value must equal the DMG's line in `SHA256SUMS-1.66.1`. The command only reads the file. Don't compare with a checksum from another version.
 
 When reporting an installation problem, write to support@topxai.xyz with your macOS version, chip, app version and the error message. Never include passwords, API keys or private chat content.
