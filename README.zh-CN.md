@@ -6,7 +6,7 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 
 ## 下载 macOS 版
 
-**[下载 TopxAI Desktop 1.67.0（Apple Silicon）](https://dl.topxai.xyz/desktop/updates/darwin/arm64/TopxAI-1.67.0-macOS-arm64.dmg)**
+**[下载 TopxAI Desktop 1.67.2（Apple Silicon）](https://dl.topxai.xyz/desktop/updates/darwin/arm64/TopxAI-1.67.2-macOS-arm64.dmg)**
 
 [查看发布说明](https://github.com/UnbelievableT/topxai-releases/releases/latest)，也可以到 https://topxai.xyz 下载
 
@@ -18,13 +18,13 @@ TopxAI 的公开安装包与安装说明。此仓库用于分发桌面客户端�
 
 打开 DMG，将 TopxAI 拖入“应用程序”。第一次打开时，macOS 会询问是否打开从互联网下载的应用，点“打开”。详细步骤、权限说明和校验方法见发布附件 `INSTALL.zh-CN.md`。
 
-每个版本的校验值放在安装包旁边的 `SHA256SUMS-<版本>` 里，1.67.0 的是 `https://dl.topxai.xyz/desktop/updates/darwin/arm64/SHA256SUMS-1.67.0`。不要下载 GitHub 自动生成的 “Source code” 压缩包来安装应用；它仅包含本下载仓库的说明文件。
+每个版本的校验值放在安装包旁边的 `SHA256SUMS-<版本>` 里，1.67.2 的是 `https://dl.topxai.xyz/desktop/updates/darwin/arm64/SHA256SUMS-1.67.2`。不要下载 GitHub 自动生成的 “Source code” 压缩包来安装应用；它仅包含本下载仓库的说明文件。
 
 [中文安装说明](INSTALL.zh-CN.md) · [English installation instructions](INSTALL.md)
 
 ## 更新与反馈
 
-从 1.57.0 起，应用会自己更新：启动时查一次新版本，之后每四小时查一次，在后台下载，下次退出时安装，也可以在设置里马上装。1.57.0 到 1.66.2 会自己更新到 1.67.0，更新包 471 MB。从 1.56.0 或更早的版本升级，先退出旧版，再用新 DMG 里的应用替换它。
+从 1.57.0 起，应用会自己更新：启动时查一次新版本，之后每四小时查一次，在后台下载，下次退出时安装，也可以在设置里马上装。1.57.0 到 1.67.0 会自己更新到 1.67.2，更新包 460 MB。从 1.56.0 或更早的版本升级，先退出旧版，再用新 DMG 里的应用替换它。
 
 从 1.57.0 起，应用用的是 TopxAI 的新地址 `api.topxai.xyz`，macOS 上的应用标识也换了。从 1.56.0 或更早的版本升级，装好后要再登录一次，屏幕录制和辅助功能也要重新授权一次；会话、设置和记忆都会保留，以后换新版本不用再授权。从 1.55.0 或更早的版本升级时，还会把会话库和记忆库合并成一个，旧版本打不开合并后的库。要退回旧版，得用 `sessions/before-merge/` 里保留 7 天的原文件，或者安装前做的备份，详见安装说明。
 
